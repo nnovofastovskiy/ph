@@ -1,0 +1,56 @@
+.wrapper{
+    --dash-offset: 150;
+}
+
+
+.wrapper {
+    position: relative;
+    background-color: red;
+    width: max-content;
+    height: min-content;
+    display: flex;
+}
+
+.circle {
+    /* cursor: pointer; */
+}
+
+.wrapper svg circle {
+    cursor: pointer;
+    stroke-dasharray: var(--dash-offset);
+    stroke-dashoffset: var(--dash-offset);
+    transition: stroke-dashoffset 300ms ease;
+    fill: var(--white);
+    fill-opacity: 0.5;
+    z-index: 2;
+    /* animation: dash 1s linear alternate infinite;  */
+}
+
+.active svg circle {
+    stroke-dashoffset: 0;
+}
+
+.disactive svg circle {
+    stroke-dashoffset: var(--dash-offset);
+}
+
+.rect {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--white);
+    left: calc(50% - 5px);
+    top: calc(50% - 5px);
+    transition: transform 300ms ease;
+    z-index: 1;
+    cursor: pointer;
+    transform: rotate(-45deg);
+    /* rotate: 45deg; */
+}
+
+.active .rect {
+    transform: rotate(45deg);
+}
+
+.disactive .rect {
+}

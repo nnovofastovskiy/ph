@@ -1,0 +1,14 @@
+<svg width="50" height="50" viewBox="0 0 50 50">
+  <rect/>
+  <circle
+    stroke-linecap="round"
+    cx="25"
+    cy="25"
+    r="24"
+    stroke="white"
+    stroke-width="2"
+    fill="none"
+    stroke-mitterlimit="0"
+    transform="rotate(-90) translate(-50 0)"
+  />
+</svg>
