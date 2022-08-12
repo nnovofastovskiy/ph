@@ -12,7 +12,8 @@ export const Pagination = ({ state, ...props }: PaginationProps) => {
                     [styles.active]: state == "active",
                     [styles.disactive]: state == "disactive"
                 }
-            )}            {...props}
+            )}
+            {...props}
         >
             {/* <Circle
                 className={cn(styles.circle,
