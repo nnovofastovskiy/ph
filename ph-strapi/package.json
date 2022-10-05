@@ -10,10 +10,11 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.2.2",
-    "@strapi/plugin-users-permissions": "4.2.2",
-    "@strapi/strapi": "4.2.2",
+    "@strapi/plugin-i18n": "4.4.1",
+    "@strapi/plugin-users-permissions": "4.4.1",
+    "@strapi/strapi": "4.4.1",
     "better-sqlite3": "7.4.6",
+    "strapi": "^3.6.10",
     "strapi-tiptap-editor": "^0.7.14"
   },
   "author": {
@@ -23,7 +24,7 @@
     "uuid": "77b38bef-2d51-43f2-ace0-a039cd4b0e98"
   },
   "engines": {
-    "node": ">=12.x.x <=16.x.x",
+    "node": ">=10.16.0 <=14.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
