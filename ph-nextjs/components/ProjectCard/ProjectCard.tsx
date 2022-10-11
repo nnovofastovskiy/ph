@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectCardProps } from "./ProjectCard.props";
+import { Photo } from '../../helpers/interfaces/Projects.interface';
 
 export const ProjectCard = ({ id, image, title }: ProjectCardProps) => {
     return (

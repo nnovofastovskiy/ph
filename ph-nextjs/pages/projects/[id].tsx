@@ -1,52 +1,41 @@
 import axios from 'axios';
-import type { NextPage } from 'next';
+import type { NextPage, NextPageContext } from 'next';
 import router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Photo, Project } from '../../helpers/interfaces/Projects.interface';
 import { ProjectsPage } from '../../page_components';
 
-const ProjectPage: NextPage = () => {
+const defaultImage: Photo = {
+    id: null,
+    src: "/uploads/Frame_31_36f215031c.png?updated_at=2022-10-11T17:06:04.771Z",
+    alt: "default image of project",
+    fileName: ""
+};
+
+type ProjectPageProps = {
+    serverProject: Project | null
+}
+
+const ProjectPage: NextPage<ProjectPageProps> = ({ serverProject: serverProject }) => {
     const id = useRouter().query.id;
     // const [data, setData] = useState();
-    // const [projects, setProjects] = useState<Project[]>();
+    const [project, setProject] = useState<Project>();
 
-    // const load = async () => {
-    //     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}/api/projects`, { params: { populate: "*" } });
-    //     setData(data);
+    const load = async () => {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}/api/projects/${router.query.id}`, { params: { populate: "*" } });
+        console.log(data.data);
+        return data;
+    };
 
-    //     const serverProjectsArr = data.data;
-    //     const projectsArr: Project[] = serverProjectsArr.map(item => {
-    //         const photosArr = item.attributes.photos.data;
-    //         const mappedPhotos: Photo[] = photosArr.map(item => {
-    //             const mappedItem: Photo = {
-    //                 id: item.id,
-    //                 fileName: item.attributes.name,
-    //                 src: item.attributes.url,
-    //                 alt: item.attributes.alternativeText
-    //             };
-    //             return mappedItem;
-    //         });
-    //         const mappedItem: Project = {
-    //             id: item.id,
-    //             title: item.attributes.title,
-    //             costumer: item.attributes.costumer,
-    //             description: item.attributes.description,
-    //             isActive: item.attributes.isActive,
-    //             photos: mappedPhotos
-    //         };
+    useEffect(() => {
+        async function load() {
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_DOMAIN}/api/projects/${router.query.id}`, { params: { populate: "*" } });
+            setProject(data);
+        }
+        load();
+    }, []);
 
-    //         return mappedItem;
-    //     });
-    //     setProjects(projectsArr);
-
-    //     return data;
-    // };
-
-    // useEffect(() => {
-    //     load();
-    // }, []);
-
-    // console.log(process.env.NEXT_PUBLIC_STRAPI_DOMAIN);
+    console.log(process.env.NEXT_PUBLIC_STRAPI_DOMAIN);
 
 
     return (
@@ -64,5 +53,20 @@ const ProjectPage: NextPage = () => {
         </>
     );
 };
+
+ProjectPage.getInitialProps = async ({ query, res, req }: NextPageContext): Promise<ProjectPageProps> => {
+    if (!req) return { serverProject: null };
+    const { data: serverProducts } = await axios.get<IProduct[]>(API.products.getInCollectionById + query.categoryId);
+    const { data: serverProduct } = await axios.get<IProduct>(API.products.getOneById + query.productId);
+    // const { data: serverCategories } = await axios.get<ICategory[]>(API.collections.read);
+    if (serverProducts.filter(prod => prod._id === query.productId).length < 1) {
+        res?.writeHead(301, { Location: '/404' });
+        res?.end();
+    }
+    // serverProduct.descriptionHTML = parse(serverProduct.description);
+    return { serverProduct: serverProduct };
+
+};
+
 
 export default ProjectPage;
