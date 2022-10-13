@@ -12,7 +12,6 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.4.3",
     "@strapi/plugin-users-permissions": "4.4.3",
-    "@strapi/provider-upload-aws-s3": "^4.4.3",
     "@strapi/strapi": "4.4.3",
     "better-sqlite3": "7.4.6",
     "strapi-tiptap-editor": "^0.7.14"
@@ -24,7 +23,7 @@
     "uuid": "77b38bef-2d51-43f2-ace0-a039cd4b0e98"
   },
   "engines": {
-    "node": ">=10.16.0 <=14.x.x",
+    "node": ">=10.16.0 <=16.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
